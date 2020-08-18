@@ -21,17 +21,12 @@ def readFile(pathToFile):
         else:            
             numberOfLines = fileLengthy(pathToFile + list[contList])
             totalLineNumberInAll = fileLengthy(pathToFile + "createFile.txt")
-            for i in range(numberOfLines):
-                print ("Line content: " + lines[i])
-                j = 0
-                for j in range(totalLineNumberInAll):
-                    if lines[i] == existInFile(pathToFile + "createFile.txt", j, totalLineNumberInAll):
-                        print ("The name already exists in the file and the name is: " + existInFile)
-                    else:
-                        if j == 0:
-                            writeFile (pathToFile, "\n")
-                        else:
-                            writeFile (pathToFile, lines[i])
+            j = 0
+            for j in range(totalLineNumberInAll):
+                if existInFile(pathToFile + "createFile.txt", fileLengthy(pathToFile + "createFile.txt"), lines[j]):
+                    print ("The name already exists in the file and the name is: " + lines[j])
+                else:
+                    writeFile (pathToFile, lines[j])
             contList +=1
 
 
@@ -39,18 +34,22 @@ def writeFile(pathToFile, valueToWrite):
     fwrite = open(pathToFile + "createFile.txt", "a")
     fwrite.write(valueToWrite)    
 
-def existInFile(pathToFile, lineNumber, totalNumber):
+def existInFile(pathToFile, totalNumber, wordToConfront):
     fread = open(pathToFile, "r")
-    if lineNumber == totalNumber:
-        return "Finish"
-    else:
-        return fread.readlines(lineNumber)
+    lines = fread.readlines()
+    exist = False 
+    for z in range(totalNumber):
+        if wordToConfront == lines[z]:
+            exist = True
+        if exist:
+            break
+    return exist    
         
 
     
 def main():
-#    pathToFile = os.getcwd()
-    pathToFile = "C:/Users/palaa/Desktop/develop/python/"
+    pathToFile = os.getcwd() + '/'
+    #pathToFile = "C:/Users/palaa/Desktop/develop/python/"
     readFile(pathToFile)
 
 if __name__ == "__main__":
